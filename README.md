@@ -1,4 +1,4 @@
-# projeto-inicial-fetch-github-api
+# projeto-fetch-github-api
 
 ### Opa Tudo Bem?
 

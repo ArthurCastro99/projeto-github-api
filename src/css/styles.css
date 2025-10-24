@@ -80,7 +80,7 @@ main {
 }
 
 .container header #btn-search:hover {
-  background-color: hotpink;
+  background-color: rgb(105, 188, 255);
   color: #ffffff;
   border-color: #ffffff;
 }
@@ -141,15 +141,59 @@ main {
   display: block;
   border-radius: 7px;
   transition: 0.3s ease-in-out;
+  text-align: start;
+}
+
+.container .profile-data .repositories ul li i {
+  background-color: rebeccapurple;
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.3rem;
+  color: white;
+  display: inline-block;
 }
 
 .container .profile-data .repositories ul li a:hover {
-  background-color: hotpink;
+  background-color: rgb(105, 188, 255);
+  color: #fff;
+}
+
+.container .profile-data .repositories ul li i:hover {
+  background-color: rgb(255, 153, 0);
   color: #fff;
 }
 
 .container .profile-data.hide {
   display: none;
+}
+
+/* Eventos */
+
+.container .profile-data .events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  margin-top: 50px;
+  width: 100%;
+  height: 50%;
+  background-color: #eeeeee;
+}
+
+.container .profile-data .events h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  color: #535353;
+  font-weight: 700;
+}
+
+.container .profile-data .events li {
+  text-align: center;
+  padding: 0.7rem 0;
+}
+
+.container .profile-data .events strong {
+  color: #24292e;
+  font-weight: 700;
 }
 
 @media (max-width: 1280px) {
@@ -189,5 +233,10 @@ main {
   .container .profile-data .info .data {
     width: 100%;
     padding: 0;
+  }
+
+  .container .profile-data .repositories ul li a i {
+    padding: 0.1rem 0.2rem;
+    margin-top: 1rem;
   }
 }

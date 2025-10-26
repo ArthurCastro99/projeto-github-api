@@ -6,12 +6,14 @@ const screen = {
                   <div class="info">
                     <img src="${user.avatarUrl}" 
                     alt="Foto do perfil do usuário" />
-                    <div class="data">
-                      <h1> ${user.name ?? "Não possui nome cadastrado"} </h1>
-                      <p> ${user.bio ?? "Não possue biografia cadastrada"} </p>
-                      <p> &#128101; ${user.followersUrl} Seguidores</p>
-                      <p> &#128100; ${user.followingUrl} Seguindo</p>
-                    </div>
+                      <div class="data">
+                        <h1> ${user.name ?? "Não possui nome cadastrado"} </h1>
+                        <p> ${
+                          user.bio ?? "Não possue biografia cadastrada"
+                        } </p>
+                        <p> &#128101; ${user.followersUrl ?? 0} Seguidores</p>
+                        <p> &#128100; ${user.followingUrl ?? 0} Seguindo</p>
+                      </div>
                   </div>
                `;
 
@@ -21,13 +23,13 @@ const screen = {
     user.repositories.forEach(
       (repo) =>
         (repositoriesItens += `
-        <li><a href="${repo.html_url}" target="_blank">${repo.name}<br>
-        <br>
-         <i>&#127860; ${repo.forks_count}</i>
-          <i>&#10024; ${repo.stargazers_count}</i>
-          <i>&#128064; ${repo.watchers_count}</i>
-          <i>&#128187; ${repo.language}</i></a>
-        </li>
+          <li><a href="${repo.html_url}" target="_blank">${repo.name}<br>
+          <br>
+            <i>&#127860; ${repo.forks_count ?? "Sem forks"}</i>
+            <i>&#10024; ${repo.stargazers_count ?? "Sem estrelas"}</i>
+            <i>&#128064; ${repo.watchers_count ?? "Não watchers "}</i>
+            <i>&#128187; ${repo.language ?? "Sem linguagem"}</i></a>
+          </li>
           `)
     );
 
@@ -52,18 +54,29 @@ const screen = {
 
     eventosFiltrados.forEach((event) => {
       if (event.type === "PushEvent") {
-        eventosHTML += `<li><strong>${event.repo.name}</strong> - ${
-          event.payload.commits?.[0]?.message || "Sem mensagem no último commit."
-        }</li>`;
+        eventosHTML += `
+        <li>
+          <h3>${event.repo.name} </h3> 
+          <p> - ${
+            event.payload.commits?.[0]?.message ||
+            "Sem mensagem no último commit."
+          }
+          </p>
+        </li>
+        `;
       } else if (event.type === "CreateEvent") {
-        eventosHTML += `<li><strong>${event.repo.name}</strong> - Sem mensagem de commit.</li>`;
+        eventosHTML += `
+        <li>
+          <h3>${event.repo.name} </h3> 
+          <p> - ${event.payload.ref_type || "Sem mensagem no último commit."}
+          </p>
+        </li>`;
       }
-      console.log(event.payload.commits);
     });
 
     if (eventosHTML) {
       this.userProfile.innerHTML += `
-        <div class="events section">
+          <div class="events section">
             <h2>Eventos</h2>
             <ul>
               ${eventosHTML}
